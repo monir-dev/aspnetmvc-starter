@@ -74,6 +74,16 @@ namespace aspnetmvc_starter.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            // distory Session
+            Session.Clear();
+            Session.Abandon();
+            
+            return RedirectToAction("Index", "Auth");
+        }
+
 
         private bool VerifyPassword(User user, string Password)
         {

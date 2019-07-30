@@ -136,6 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\CustomPasswordHasher.cs" />
     <Compile Include="Helpers\Encrypt.cs" />
     <Compile Include="Helpers\ExcelExport.cs" />
