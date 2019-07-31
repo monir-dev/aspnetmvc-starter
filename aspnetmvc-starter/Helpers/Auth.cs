@@ -1,26 +1,31 @@
+using System.Web;
 using aspnetmvc_starter.Models;
 using System.Web;
+using aspnetmvc_starter.Dtos;
 
 namespace aspnetmvc_starter.Helpers
 {
-    public static class Auth
+    public class Auth
     {
-        private static User _user;
-        
-        static Auth()
-        {
-            _user = (User) HttpContext.Current.Session["UserInfo"];
-        }
-
         public static User User()
         {
-            return _user;
-        }
-
-        public static long Id()
-        {
-            return _user.Id;
+            return (User) HttpContext.Current.Session["UserInfo"];
         }
         
+        public static long Id()
+        {
+            return User().Id;
+        }
+        
+        public static bool Guest()
+        {
+            return User() == null;
+        }
+        
+        public static void DistroySession()
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
+        }
     }
 }

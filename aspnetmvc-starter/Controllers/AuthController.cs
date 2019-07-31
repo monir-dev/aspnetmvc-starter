@@ -62,7 +62,6 @@ namespace aspnetmvc_starter.Controllers
             // Set Session
             Session["UserInfo"] = authUser;
 
-
             // set permissions
             //List<int> permissions = (user.Role == null) ? new List<int>() : user.Role.Permissions.Select(p => p.Id).ToList();
             //string vmccs = db.UserLocationPermissions.Where(s => s.UserId.Equals(user.Id)).Select(s => s.VmccIds).FirstOrDefault();
@@ -78,9 +77,8 @@ namespace aspnetmvc_starter.Controllers
         public ActionResult Logout()
         {
             // distory Session
-            Session.Clear();
-            Session.Abandon();
-            
+            Auth.DistroySession();
+
             return RedirectToAction("Index", "Auth");
         }
 
