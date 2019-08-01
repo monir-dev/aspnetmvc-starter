@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="~/Content/adminLte/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    
+    @RenderSection("css", required: false)
+    
+    
+    
 
 </head>
 
@@ -33,25 +40,26 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @*<div class="content-header">
+            <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Starter Page</h1>
+                            <h1 class="m-0 text-dark">@ViewBag.ContentHeader</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
+                                @Html.Raw(ViewBag.BreadCrumb)
+                                @* <li class="breadcrumb-item"><a href="#">Home</a></li> *@
+                                @* <li class="breadcrumb-item active">Starter Page</li> *@
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
-            </div>*@
+            </div>
             <!-- /.content-header -->
             <!-- Main content -->
             <div class="content">
-                <div class="container-fluid" style="padding-top: 20px;">
+                <div class="container-fluid">
 
                     @RenderBody()
 
@@ -113,11 +121,14 @@
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)*@
 
+    
     <!-- jQuery -->
     <script src="~/Content/adminLte/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Content/adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/adminLte/dist/js/adminlte.min.js"></script>
+    
+    @RenderSection("scripts", required: false)
 </body>
 </html>
