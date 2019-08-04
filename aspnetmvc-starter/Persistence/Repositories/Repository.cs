@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
+using System.Web.WebPages;
 using aspnetmvc_starter.Core.Repositories;
+using aspnetmvc_starter.Dtos;
+using aspnetmvc_starter.Helpers;
+using aspnetmvc_starter.Models;
 
 namespace aspnetmvc_starter.Persistence.Repositories
 {
@@ -40,6 +46,82 @@ namespace aspnetmvc_starter.Persistence.Repositories
             // this on your own.
             return Context.Set<TEntity>().ToList();
         }
+        
+        public IEnumerable<TEntity> Grid(HttpRequestBase Request)
+        {
+            var take = 0;
+            var skip = 0;
+            var page = 0;
+            var pageSize = 0;
+            string OrderByField = "";
+            string OrderByType = "";
+            List<KendoFilter> filters = new List<KendoFilter>();
+            
+            KendoGrid.GridParams(out take, out skip, out page, out pageSize, out OrderByField, out OrderByType, out filters, Request);
+
+            IEnumerable<TEntity> query = Context.Set<TEntity>();
+
+            if (!String.IsNullOrEmpty(OrderByField) && !String.IsNullOrEmpty(OrderByType))
+            {
+                query = (OrderByType == "desc") ? query.OrderByDescending(o => o.GetProperty(OrderByField)) : query.OrderBy(o => o.GetProperty(OrderByField));
+            }
+
+            foreach (var filter in filters)
+            {
+                if (filter.Operator == "eq")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null &&  o.GetProperty(filter.Name).ToString() == filter.Value);
+                }
+                else if (filter.Operator == "neq")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null &&  o.GetProperty(filter.Name).ToString() != filter.Value);
+                }
+                else if (filter.Operator == "startswith")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null &&  o.GetProperty(filter.Name).ToString().StartsWith(filter.Value));
+                }
+                else if (filter.Operator == "endswith")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null &&  o.GetProperty(filter.Name).ToString().EndsWith(filter.Value));
+                }
+                else if (filter.Operator == "contains")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null &&  o.GetProperty(filter.Name).ToString().ToLower().Contains(filter.Value.ToLower()));
+                }
+                else if (filter.Operator == "doesnotcontain")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null &&  !o.GetProperty(filter.Name).ToString().ToLower().Contains(filter.Value.ToLower()));
+                }
+                else if (filter.Operator == "isnull")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString() == null);
+                }
+                else if (filter.Operator == "isnotnull")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString() != null);
+                }
+                else if (filter.Operator == "isempty")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString().IsEmpty());
+                }
+                else if (filter.Operator == "isnotempty")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null && !o.GetProperty(filter.Name).ToString().IsEmpty());
+                }
+                else if (filter.Operator == "isnullorempty")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null && String.IsNullOrEmpty(o.GetProperty(filter.Name).ToString()));
+                }
+                else if (filter.Operator == "isnotnullorempty")
+                {
+                    query = query.Where(o => o.GetProperty(filter.Name) != null && !String.IsNullOrEmpty(o.GetProperty(filter.Name).ToString()));
+                }
+            }
+
+            return query.Skip(skip).Take(pageSize).ToList();
+        }
+        
+        
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {

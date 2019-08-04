@@ -1,8 +1,15 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
+using aspnetmvc_starter.Helpers;
 using aspnetmvc_starter.Models;
 using aspnetmvc_starter.Persistence;
 using aspnetmvc_starter.Validations.ActionFilters;
+using aspnetmvc_starter.Dtos;
 
 namespace aspnetmvc_starter.Controllers
 {
@@ -23,15 +30,17 @@ namespace aspnetmvc_starter.Controllers
 
         public ActionResult Grid()
         {
-            var data = _repo.Users.GetAll().Select(u => new
+            var data = _repo.Users.Grid(Request).Select(d => new
             {
-                Id = u.Id,
-                Name = u.Name,
-                Email = u.Email,
-                ActionLink = $"<a href='/Users/Edit/{u.Id}' class='btn btn-warning'><i class='far fa-edit'></i></a> <a href='/Users/Delete/{u.Id}' class='btn btn-danger'><i class='far fa-trash-alt'></i></a>"
+                Id = d.Id,
+                Name = d.Name,
+                Email = d.Email,
+                ActionLink = KendoGrid.GenerateButtons("Users", d.Id, true, true, false)
             });
-
+            
             return Json(data, JsonRequestBehavior.AllowGet);
+            //return Json(new { total = data.Count(), data = data }, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

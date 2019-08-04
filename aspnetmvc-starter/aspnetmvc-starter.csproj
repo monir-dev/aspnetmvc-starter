@@ -137,6 +137,7 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\Repositories\IUserRepository.cs" />
+    <Compile Include="Dtos\KendoFilter.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -145,6 +146,8 @@
     <Compile Include="Helpers\CustomPasswordHasher.cs" />
     <Compile Include="Helpers\Encrypt.cs" />
     <Compile Include="Helpers\ExcelExport.cs" />
+    <Compile Include="Helpers\KendoGrid.cs" />
+    <Compile Include="Helpers\MyExtentions.cs" />
     <Compile Include="Models\DefaultConnection.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
