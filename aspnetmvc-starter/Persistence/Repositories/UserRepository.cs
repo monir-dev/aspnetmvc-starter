@@ -16,7 +16,8 @@ namespace aspnetmvc_starter.Persistence.Repositories
         {
             return DefaultConnection.Users.ToList();
         }
-
+        
+        
         public DefaultConnection DefaultConnection
         {
             get { return Context as DefaultConnection; }

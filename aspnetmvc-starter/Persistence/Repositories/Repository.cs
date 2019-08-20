@@ -1,7 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -9,7 +9,6 @@ using System.Web.WebPages;
 using aspnetmvc_starter.Core.Repositories;
 using aspnetmvc_starter.Dtos;
 using aspnetmvc_starter.Helpers;
-using aspnetmvc_starter.Models;
 
 namespace aspnetmvc_starter.Persistence.Repositories
 {
@@ -59,7 +58,7 @@ namespace aspnetmvc_starter.Persistence.Repositories
             return query.Skip(skip).Take(pageSize).ToList();
         }
 
-        private static IEnumerable<TEntity> GridFilterAndOrder(out int skip, out int pageSize, IEnumerable<TEntity> query, HttpRequestBase Request)
+        protected static IEnumerable<TEntity> GridFilterAndOrder(out int skip, out int pageSize, IEnumerable<TEntity> query, HttpRequestBase Request)
         {
             var take = 0;
             var page = 0;

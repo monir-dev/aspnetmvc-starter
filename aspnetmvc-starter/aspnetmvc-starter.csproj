@@ -146,6 +146,7 @@
     <Compile Include="Helpers\CustomPasswordHasher.cs" />
     <Compile Include="Helpers\Encrypt.cs" />
     <Compile Include="Helpers\ExcelExport.cs" />
+    <Compile Include="Helpers\JsonConvert.cs" />
     <Compile Include="Helpers\KendoGrid.cs" />
     <Compile Include="Helpers\MyExtentions.cs" />
     <Compile Include="Models\DefaultConnection.Context.cs">
