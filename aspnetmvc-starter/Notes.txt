@@ -1,9 +1,0 @@
-Default Login Password:
------------------------
-monir@gmail.com
-password
-
-
-Tasks:
-------
-change projects namespace

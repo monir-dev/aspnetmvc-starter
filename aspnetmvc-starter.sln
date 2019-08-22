@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28902.138
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetmvc-starter", "aspnetmvc-starter\aspnetmvc-starter.csproj", "{BE80D25C-44D5-4AE6-81DF-0A84C9FBA6E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetmvc-starter.Web", "aspnetmvc-starter.Web\aspnetmvc-starter.Web.csproj", "{BE80D25C-44D5-4AE6-81DF-0A84C9FBA6E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetmvc-starter.Base", "aspnetmvc-starter.Base\aspnetmvc-starter.Base.csproj", "{CB68B1C7-3115-4421-825D-6CE4F2528628}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetmvc-starter", "aspnetmvc-starter\aspnetmvc-starter.csproj", "{CB68B1C7-3115-4421-825D-6CE4F2528628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

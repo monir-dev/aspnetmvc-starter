@@ -1,0 +1,10 @@
+
+/*breadcrumb item active inactive state start*/
+.breadcrumb > .breadcrumb-item > a {
+    color: black;
+}
+
+.breadcrumb > .active > a {
+    color: #007bff;
+}
+/*breadcrumb item active inactive state end*/
