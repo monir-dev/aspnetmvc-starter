@@ -1,6 +1,5 @@
 using System.Web;
-using aspnetmvc_starter.Models;
-using aspnetmvc_starter.Dtos;
+using aspnetmvc_starter.Main.Core.Domain;
 
 namespace aspnetmvc_starter.Helpers
 {

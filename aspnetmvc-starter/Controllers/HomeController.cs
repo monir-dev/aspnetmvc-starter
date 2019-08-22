@@ -1,12 +1,7 @@
 ﻿using aspnetmvc_starter.Validations.ActionFilters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using aspnetmvc_starter.Helpers;
-using aspnetmvc_starter.Models;
-using aspnetmvc_starter.Persistence;
+using aspnetmvc_starter.Base;
+using aspnetmvc_starter.Main.Core.Domain;
 
 namespace aspnetmvc_starter.Controllers
 {

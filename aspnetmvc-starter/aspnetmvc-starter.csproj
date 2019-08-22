@@ -134,9 +134,6 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Core\IUnitOfWork.cs" />
-    <Compile Include="Core\Repositories\IRepository.cs" />
-    <Compile Include="Core\Repositories\IUserRepository.cs" />
     <Compile Include="Dtos\KendoFilter.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -149,27 +146,6 @@
     <Compile Include="Helpers\JsonConvert.cs" />
     <Compile Include="Helpers\KendoGrid.cs" />
     <Compile Include="Helpers\MyExtentions.cs" />
-    <Compile Include="Models\DefaultConnection.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DefaultConnection.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DefaultConnection.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DefaultConnection.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DefaultConnection.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DefaultConnection.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>DefaultConnection.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Repositories\Repository.cs" />
-    <Compile Include="Persistence\Repositories\UserRepository.cs" />
-    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\ActionFilters\HasPermissionAttribute.cs" />
     <Compile Include="Validations\ActionFilters\IsAuthorizedAttribute.cs" />
@@ -193,25 +169,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DefaultConnection.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DefaultConnection.Context.cs</LastGenOutput>
-      <DependentUpon>DefaultConnection.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DefaultConnection.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DefaultConnection.edmx</DependentUpon>
-      <LastGenOutput>DefaultConnection.cs</LastGenOutput>
-    </Content>
+    <Content Include="Notes.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DefaultConnection.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DefaultConnection.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DefaultConnection.edmx.diagram">
-      <DependentUpon>DefaultConnection.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -244,8 +204,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\adminLte\" />
-    <Folder Include="Core\Domain" />
-    <Folder Include="Persistence\EntityConfigurations" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -262,6 +220,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\aspnetmvc-starter.Base\aspnetmvc-starter.Base.csproj">
+      <Project>{cb68b1c7-3115-4421-825d-6ce4f2528628}</Project>
+      <Name>aspnetmvc-starter.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
