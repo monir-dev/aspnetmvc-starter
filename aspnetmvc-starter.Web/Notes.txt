@@ -6,4 +6,10 @@ password
 
 Tasks:
 ------
-change projects namespace
+Register functionalities
+Login/Register with social media
+On Register Email Verification
+
+
+MVC core project add with same functionalities
+

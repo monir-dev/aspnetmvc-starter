@@ -2,11 +2,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace aspnetmvc_starter.Web.Helpers
 {
-    public class JsonConvert
+    public class JsonSerialize
     {
+        public string DataTableToJSONWithJSONNet(DataTable table)
+        {
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(table);
+            return JSONString;
+        }
         public string DataTableToJSONWithJavaScriptSerializer(DataTable table)
         {
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -23,7 +30,6 @@ namespace aspnetmvc_starter.Web.Helpers
             }
             return jsSerializer.Serialize(parentRow);
         }
-        
         public string DataTableToJSONWithStringBuilder(DataTable table)
         {
             var JSONString = new StringBuilder();
@@ -57,7 +63,6 @@ namespace aspnetmvc_starter.Web.Helpers
             }
             return JSONString.ToString();
         }
-        
         
     }
 }

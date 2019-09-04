@@ -36,6 +36,12 @@ namespace aspnetmvc_starter.Web.Controllers
 
         public ActionResult Login()
         {
+            // Check if user already logged in
+            if (Session["UserInfo"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
             return View();
         }
 
