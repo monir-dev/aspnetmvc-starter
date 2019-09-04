@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using aspnetmvc_starter.Core.Repositories;
-using aspnetmvc_starter.Models;
+using aspnetmvc_starter.Core;
+using aspnetmvc_starter.Main.Core.Domain;
 
-namespace aspnetmvc_starter.Persistence.Repositories
+namespace aspnetmvc_starter.Persistence
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
@@ -16,7 +16,8 @@ namespace aspnetmvc_starter.Persistence.Repositories
         {
             return DefaultConnection.Users.ToList();
         }
-
+        
+        
         public DefaultConnection DefaultConnection
         {
             get { return Context as DefaultConnection; }

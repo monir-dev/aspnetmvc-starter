@@ -1,14 +1,18 @@
 using aspnetmvc_starter.Core;
-using aspnetmvc_starter.Core.Repositories;
-using aspnetmvc_starter.Models;
-using aspnetmvc_starter.Persistence.Repositories;
+using aspnetmvc_starter.Main.Core.Domain;
 
 namespace aspnetmvc_starter.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DefaultConnection _context;
-
+        
+        public UnitOfWork()
+        {
+            _context = new DefaultConnection();
+            Users = new UserRepository(_context);
+        }
+        
         public UnitOfWork(DefaultConnection context)
         {
             _context = context;

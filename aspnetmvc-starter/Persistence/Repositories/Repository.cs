@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using aspnetmvc_starter.Core.Repositories;
+using aspnetmvc_starter.Core;
 
-namespace aspnetmvc_starter.Persistence.Repositories
+namespace aspnetmvc_starter.Persistence
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
@@ -40,6 +40,26 @@ namespace aspnetmvc_starter.Persistence.Repositories
             // this on your own.
             return Context.Set<TEntity>().ToList();
         }
+
+        public IQueryable<TEntity> Fetch()
+        {
+            return Context.Set<TEntity>();
+        }
+
+        //public IEnumerable<TEntity> Grid(HttpRequestBase Request)
+        //{
+        //    var skip = 0;
+        //    var pageSize = 0;
+
+        //    IEnumerable<TEntity> query = Context.Set<TEntity>();
+
+        //    query = GridFilterAndOrder(out skip, out pageSize, query, Request);
+
+        //    return query.Skip(skip).Take(pageSize).ToList();
+        //}
+
+        
+
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {

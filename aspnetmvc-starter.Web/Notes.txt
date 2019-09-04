@@ -1,0 +1,15 @@
+Default Login Password:
+-----------------------
+monir@gmail.com
+password
+
+
+Tasks:
+------
+Register functionalities
+Login/Register with social media
+On Register Email Verification
+
+
+MVC core project add with same functionalities
+
