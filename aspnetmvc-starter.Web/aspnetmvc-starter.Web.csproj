@@ -145,6 +145,7 @@
     <Compile Include="Helpers\ExcelExport.cs" />
     <Compile Include="Helpers\JsonSerialize.cs" />
     <Compile Include="Helpers\KendoGrid.cs" />
+    <Compile Include="Helpers\LinqExtension.cs" />
     <Compile Include="Helpers\MyExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\ActionFilters\HasPermissionAttribute.cs" />
