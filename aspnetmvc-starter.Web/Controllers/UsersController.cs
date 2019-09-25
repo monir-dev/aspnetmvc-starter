@@ -3,23 +3,31 @@ using System.Linq;
 using System.Web.Mvc;
 using aspnetmvc_starter.Main.Core.Domain;
 using aspnetmvc_starter.Persistence;
+using aspnetmvc_starter.Web.Dtos;
 using aspnetmvc_starter.Web.Helpers;
+using aspnetmvc_starter.Web.Utility;
 using aspnetmvc_starter.Web.Validations.ActionFilters;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace aspnetmvc_starter.Web.Controllers
 {
     [IsAuthorized]
     public class UsersController : Controller
     {
+        private readonly IMapper _mapper;
         public readonly UnitOfWork _repo;
 
         public UsersController()
         {
+            //_mapper = AutoMapperProfile.Init();
             _repo = new UnitOfWork();
         }
         
         public ActionResult Index()
-        {   
+        {
+            var userDtos = _repo.Users.Fetch().FirstOrDefault().MapTo<UserDto>();
+            
             return View();
         }
 
