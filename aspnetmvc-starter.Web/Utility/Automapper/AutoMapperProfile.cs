@@ -2,7 +2,7 @@ using aspnetmvc_starter.Main.Core.Domain;
 using aspnetmvc_starter.Web.Dtos;
 using AutoMapper;
 
-namespace aspnetmvc_starter.Web
+namespace aspnetmvc_starter.Web.Utility
 {
     public class AutoMapperProfile : Profile
     {

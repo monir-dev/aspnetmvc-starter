@@ -27,6 +27,8 @@ namespace aspnetmvc_starter.Web.Controllers
         public ActionResult Index()
         {
             var userDtos = _repo.Users.Fetch().FirstOrDefault().MapTo<UserDto>();
+
+            var test = _repo.Users.Fetch().MapTo<UserDto>().ToList();
             
             return View();
         }
