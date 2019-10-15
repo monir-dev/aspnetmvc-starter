@@ -1,24 +1,35 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using aspnetmvc_starter.Main.Core.Domain;
 using aspnetmvc_starter.Persistence;
+using aspnetmvc_starter.Web.Dtos;
 using aspnetmvc_starter.Web.Helpers;
+using aspnetmvc_starter.Web.Utility;
 using aspnetmvc_starter.Web.Validations.ActionFilters;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace aspnetmvc_starter.Web.Controllers
 {
     [IsAuthorized]
     public class UsersController : Controller
     {
+        private readonly IMapper _mapper;
         public readonly UnitOfWork _repo;
 
         public UsersController()
         {
+            //_mapper = AutoMapperProfile.Init();
             _repo = new UnitOfWork();
         }
         
         public ActionResult Index()
         {
+            var userDtos = _repo.Users.Fetch().FirstOrDefault().MapTo<UserDto>();
+
+            var test = _repo.Users.Fetch().MapTo<UserDto>().ToList();
+            
             return View();
         }
 
@@ -33,16 +44,21 @@ namespace aspnetmvc_starter.Web.Controllers
             total = query.Count();
 
             // apply Grid Orders and Filters
-            var filteredResult = KendoGrid<User>.Grid(query, Request, out skip, out pageSize);
+            IQueryable<User> users = KendoGrid<User>.GridQueryable(query, Request, out skip, out pageSize);
 
             // apply additional conditions if any
-            //filteredResult = //your conditions
 
+            // ordery by if request has no sortby
+            if (string.IsNullOrEmpty(KendoGrid<object>.OrderByExistInRequest(Request)))
+            {
+                users = users?.OrderBy(o => o.Name);
+            }
+            
             // pagination conditions
-            filteredResult = filteredResult.Skip(skip).Take(pageSize);
+            users = users?.Skip(skip).Take(pageSize);
 
             // format data according to grid frontend
-            var data = filteredResult.Select(d => new
+            var data = users?.ToList().Select(d => new
             {
                 Id = d.Id,
                 Name = d.Name,

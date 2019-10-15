@@ -4,8 +4,12 @@ monir@gmail.com
 password
 
 
+
+
 Tasks:
 ------
+Automapper Functionalities complete
+
 Register functionalities
 Login/Register with social media
 On Register Email Verification

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,12 +12,12 @@ namespace aspnetmvc_starter.Web.Helpers
 {
     public class KendoGrid<T> where T : class
     {
-        public static IEnumerable<T> Grid(IQueryable<T> query, HttpRequestBase Request, out int skip, out int pageSize)
+        public static IEnumerable<T> GridEnumerable(IQueryable<T> query, HttpRequestBase Request, out int skip, out int pageSize)
         {
-            return GridFilterAndOrder(out skip, out pageSize, query, Request);
+            return GridFilterAndOrderEnumerable(out skip, out pageSize, query, Request);
         }
 
-        public static IEnumerable<T> GridFilterAndOrder(out int skip, out int pageSize, IEnumerable<T> query, HttpRequestBase Request)
+        public static IEnumerable<T> GridFilterAndOrderEnumerable(out int skip, out int pageSize, IEnumerable<T> query, HttpRequestBase Request)
         {
             var take = 0;
             var page = 0;
@@ -103,6 +104,94 @@ namespace aspnetmvc_starter.Web.Helpers
             return query;
         }
 
+        
+        public static IQueryable<T> GridQueryable(IQueryable<T> query, HttpRequestBase Request, out int skip, out int pageSize)
+        {
+            return GridFilterAndOrderQueryable(out skip, out pageSize, query, Request);
+        }
+        public static IQueryable<T> GridFilterAndOrderQueryable(out int skip, out int pageSize, IQueryable<T> query, HttpRequestBase Request)
+        {
+            var take = 0;
+            var page = 0;
+            string OrderByField = "";
+            string OrderByType = "";
+            List<KendoFilter> filters = new List<KendoFilter>();
+
+            GridParams(out take, out skip, out page, out pageSize, out OrderByField, out OrderByType, out filters, Request);
+
+
+            if (!String.IsNullOrEmpty(OrderByField) && !String.IsNullOrEmpty(OrderByType))
+            {
+                if (OrderByType == "desc")
+                    query = (IQueryable<T>) query.OrderByDescending(OrderByField);
+                else
+                    query = query.OrderBy(OrderByField);
+            }
+
+            if (!filters.Any()) return query;
+
+            IEnumerable<T> q = query.AsEnumerable();
+
+            foreach (var filter in filters)
+            {
+                switch (filter.Operator)
+                {
+                    case "eq":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString() == filter.Value);
+                        break;
+                    case "neq":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString() != filter.Value);
+                        break;
+                    case "startswith":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString().StartsWith(filter.Value));
+                        break;
+                    case "endswith":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString().EndsWith(filter.Value));
+                        break;
+                    case "contains":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null &&
+                            o.GetProperty(filter.Name).ToString().ToLower().Contains(filter.Value.ToLower()));
+                        break;
+                    case "doesnotcontain":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null &&
+                            !o.GetProperty(filter.Name).ToString().ToLower().Contains(filter.Value.ToLower()));
+                        break;
+                    case "isnull":
+                        q = q.Where(o => o.GetProperty(filter.Name) != null);
+                        break;
+                    case "isnotnull":
+                        q = q.Where(o => o.GetProperty(filter.Name) == null);
+                        break;
+                    case "isempty":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && o.GetProperty(filter.Name).ToString().IsEmpty());
+                        break;
+                    case "isnotempty":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && !o.GetProperty(filter.Name).ToString().IsEmpty());
+                        break;
+                    case "isnullorempty":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && String.IsNullOrEmpty(o.GetProperty(filter.Name).ToString()));
+                        break;
+                    case "isnotnullorempty":
+                        q = q.Where(o =>
+                            o.GetProperty(filter.Name) != null && !String.IsNullOrEmpty(o.GetProperty(filter.Name).ToString()));
+                        break;
+
+                }
+
+            }
+
+            return q.AsQueryable();
+        }
+        
         public static void GridParams(out int take, out int skip, out int page, out int pageSize, out string OrderByField, out string OrderByType, out List<KendoFilter> filters, HttpRequestBase Request)
         {
             take = int.Parse(Request.Params["take"]);
@@ -153,7 +242,11 @@ namespace aspnetmvc_starter.Web.Helpers
             
             return buttons.ToString();
         }
-        
+
+        public static string OrderByExistInRequest(HttpRequestBase Request)
+        {
+            return !String.IsNullOrEmpty(Request.Params["sort[0][field]"]) ? Request.Params["sort[0][field]"] : "";
+        }
     }
     
 }

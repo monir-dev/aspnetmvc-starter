@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -145,11 +149,31 @@
     <Compile Include="Helpers\ExcelExport.cs" />
     <Compile Include="Helpers\JsonSerialize.cs" />
     <Compile Include="Helpers\KendoGrid.cs" />
+    <Compile Include="Helpers\LinqExtension.cs" />
     <Compile Include="Helpers\MyExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\AppConstant.cs" />
+    <Compile Include="Utility\Automapper\AutoMapperProfile.cs" />
+    <Compile Include="Utility\Automapper\MapperExtentions.cs" />
+    <Compile Include="Utility\Common.cs" />
+    <Compile Include="Utility\CommonExceptionMessage.cs" />
+    <Compile Include="Utility\CommonMessages.cs" />
+    <Compile Include="Utility\CustomMembershipProvider.cs" />
+    <Compile Include="Utility\DecimalModelBinder.cs" />
+    <Compile Include="Utility\FileUtility.cs" />
+    <Compile Include="Utility\MapperBase.cs" />
+    <Compile Include="Utility\PredicateBuilder.cs" />
+    <Compile Include="Utility\Resources\ErrorMessages.Designer.cs" />
+    <Compile Include="Utility\SelectListItemExtension.cs" />
+    <Compile Include="Utility\Utils.cs" />
     <Compile Include="Validations\ActionFilters\HasPermissionAttribute.cs" />
     <Compile Include="Validations\ActionFilters\IsAuthorizedAttribute.cs" />
     <Compile Include="Validations\ActionSelectors\IsAuthorized.cs" />
+    <Compile Include="Validations\AttributeValidator\DateEndAttribute.cs" />
+    <Compile Include="Validations\AttributeValidator\DateRangeAttribute.cs" />
+    <Compile Include="Validations\AttributeValidator\DateStartAttribute.cs" />
+    <Compile Include="Validations\AttributeValidator\EmailAttribute.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Default.mdf" />
@@ -183,6 +207,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Utility\Resources\ErrorMessages.resx" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
