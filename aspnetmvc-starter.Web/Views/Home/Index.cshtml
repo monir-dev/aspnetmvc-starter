@@ -13,9 +13,10 @@
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
-            @Auth.User().Name
+            @User.Identity.Name
+            @*@Auth.User().Name*@
             <br>
-            <h>@Auth.Guest()</h>
+            <h>@*@Auth.Guest()*@</h>
         </p>
         <p>
             ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that

@@ -8,3 +8,72 @@
     color: #007bff;
 }
 /*breadcrumb item active inactive state end*/
+
+
+/*Bootstrap overrite start*/
+.input-validation-error {
+    border-color: #dc3545;
+}
+
+.valid {
+    border-color: #28a745;
+}
+/*Bootstrap overrite end*/
+
+
+
+
+/*Kendo Grid Specific css Start*/
+#grid {
+    width: 100%;
+}
+
+.grid-add-button {
+    margin: 15px 0;
+}
+
+.grid-row-edit {
+    color: white !important;
+}
+
+.grid-row-delete {
+    color: white !important;
+}
+
+.col-form-label {
+    text-align: end;
+}
+
+.k-grid td {
+    padding: .4em .3em !important;
+}
+
+/*Kendo Grid Specific css End*/
+
+
+
+
+/*select 2 style adjustment start*/
+.select2-container {
+             padding-top: .2em !important;
+         }
+
+.select2-selection__arrow {
+    margin-top: .4em !important;
+}
+
+.select2-selection {
+    height: 2.1em !important;
+}
+
+.select2-dropdown--below {
+    margin-top: -.2em !important;
+}
+/*select 2 style adjustment end*/
+
+
+/*form label start*/
+.col-form-label {
+    /*font-weight: normal !important;*/
+}
+/*form label end*/

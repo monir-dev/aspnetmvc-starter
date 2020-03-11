@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using aspnetmvc_starter.Web.Utility;
 using AutoMapper;
+using aspnetmvc_starter.Web;
 
 namespace aspnetmvc_starter.Web
 {

@@ -9,6 +9,8 @@ namespace aspnetmvc_starter.Web.Validations.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            base.OnActionExecuting(filterContext);
+
             if (HttpContext.Current.Session["UserInfo"] == null)
             {
                 //Signout user
@@ -25,6 +27,18 @@ namespace aspnetmvc_starter.Web.Validations.ActionFilters
                 return;
             }
 
+
+            // Check if session has "PlantId"
+            if (CHECK_IF_SESSION_HAS_PLANT_ID())
+            {
+                //Redirect user to login page
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
+                {
+                    { "action", "Index" },
+                    { "controller", "Home" }
+                });
+            }
+
             //if (!CHECK_IF_USER_LOGGED_IN())
             //{
             //    // If this user does not have the required permission then redirect to login page
@@ -32,6 +46,13 @@ namespace aspnetmvc_starter.Web.Validations.ActionFilters
             //    var loginUrl = url.Content("/Auth/Login");
             //    filterContext.HttpContext.Response.Redirect(loginUrl, true);
             //}
+        }
+
+        private bool CHECK_IF_SESSION_HAS_PLANT_ID()
+        {
+            var inHome = HttpContext.Current.Request.RawUrl == "/" || HttpContext.Current.Request.RawUrl.Contains("Home/Index");
+
+            return !inHome && HttpContext.Current.Session["ComapanyCode"] == null;
         }
 
         private bool CHECK_IF_USER_LOGGED_IN()
